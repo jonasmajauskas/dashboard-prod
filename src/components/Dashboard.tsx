@@ -173,7 +173,7 @@ export function Dashboard() {
   const load500Data = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/initiate-oauth');
+      const res = await fetch('https://dashboard-server-prod.vercel.app/api/initiate-oauth');
       const data = await res.json();
 
       if (data.oauth_token && data.auth_url) {
@@ -192,7 +192,7 @@ export function Dashboard() {
         }
 
         // Step 2: exchange verifier + token for access token
-        const accessRes = await fetch('http://localhost:4000/api/execute-oauth', {
+        const accessRes = await fetch('https://dashboard-server-prod.vercel.app/api/execute-oauth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -468,7 +468,7 @@ export function Dashboard() {
   const findHighs = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/fetch-sp500-quotes');
+      const res = await fetch('https://dashboard-server-prod.vercel.app/api/fetch-sp500-quotes');
       const data = await res.json();
       console.log('✅ findHighs response:', data);
 
@@ -488,7 +488,7 @@ export function Dashboard() {
   // const load500Data = async () => {
   //   setIsLoading(true);
   //   try {
-  //     const res = await fetch('http://localhost:4000/api/initiate-oauth');
+  //     const res = await fetch('https://dashboard-server-prod.vercel.app/api/initiate-oauth');
   //     const data = await res.json();
 
   //     if (data.oauth_token && data.auth_url) {
@@ -507,7 +507,7 @@ export function Dashboard() {
   //       }
 
   //       // Step 2: exchange verifier + token for access token
-  //       const accessRes = await fetch('http://localhost:4000/api/execute-oauth', {
+  //       const accessRes = await fetch('https://dashboard-server-prod.vercel.app/api/execute-oauth', {
   //         method: 'POST',
   //         headers: { 'Content-Type': 'application/json' },
   //         body: JSON.stringify({
@@ -565,7 +565,7 @@ export function Dashboard() {
       setIsLoading(true);
 
       try {
-        const res = await fetch('http://localhost:4000/api/get-historical-data');
+        const res = await fetch('https://dashboard-server-prod.vercel.app/api/get-historical-data');
         if (!res.ok) throw new Error(`Failed to fetch historical data (${res.status})`);
 
         const json = await res.json();
@@ -581,7 +581,7 @@ export function Dashboard() {
 
           if (hoursOld > 24) {
             console.log('⏰ Data is stale — fetching fresh quotes...');
-            const freshRes = await fetch('http://localhost:4000/api/fetch-sp500-quotes');
+            const freshRes = await fetch('https://dashboard-server-prod.vercel.app/api/fetch-sp500-quotes');
             const freshJson = await freshRes.json();
             console.log('✅ findHighs response:', freshJson);
 
@@ -613,7 +613,7 @@ export function Dashboard() {
   useEffect(() => {
     const fetchLastPullTime = async () => {
       try {
-        const res = await fetch('http://localhost:4000/api/set-pull-time', {
+        const res = await fetch('https://dashboard-server-prod.vercel.app/api/set-pull-time', {
           method: 'POST',
         });
         const json = await res.json();
